@@ -2,7 +2,7 @@
 
 ## Overview
 
-As part of my university coursework, I was tasked with creating an application using the AWS cloud platform. I chose to develop an application called LoL Buddy, which caters to League of Legends computer game enthusiasts. The objective of the application is to help users keep track of their favourite players. A complete list of features is as follows.
+LoL Buddy is a web application, which caters to League of Legends computer game enthusiasts. The objective of the application is to help users keep track of their favourite players. A complete list of features is as follows.
 
 - User login and registration
 - Player search
@@ -12,7 +12,7 @@ As part of my university coursework, I was tasked with creating an application u
 - Champion search form
 - Champion profile page
 
-The application was written in Python and uses Flask as the web framework. The front end consists of HTML, CSS and JavaScript. The AWS services chosen to develop LoL Buddy include Elastic Beanstalk, S3, DynamoDB, API Gateway, Lambda and CloudSearch. Other external services, such as Google Chart API, League of Legends API and League of Legends Data Dragon, were also used.
+The application was written in Python and uses Flask as the web framework. The front end consists of HTML, CSS and JavaScript. Various AWS services were chosen to develop LoL Buddy, including Elastic Beanstalk, S3, DynamoDB, API Gateway, Lambda and CloudSearch. Other external services, such as Google Chart API, League of Legends API and League of Legends Data Dragon, were also used.
 
 The application is no longer on the AWS platform, but all the code can be found here. The main application code is in the “app” folder. The “predeployment” folder consists of scripts that were used to set up certain AWS services. The code that was run by Lambda is in the “lambda_functions” folder.
 
