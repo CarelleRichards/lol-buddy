@@ -1,0 +1,105 @@
+{% extends 'base.html' %}
+{% block main %}
+
+<div class="hero-image hero-image-index-page">
+    <div class="container hero-text">
+        <div class="row mt-5">
+            <div class="col">
+                <h4 class="big-heading mb-4 mt-30">Player search</h4>
+            </div>
+        </div>
+        <form action="" method="POST">
+            <div class="row">
+                <div class="col-lg-3">
+                    <label class="muted-heading">Region</label>
+                    <div class="input-group">
+                        <select class="custom-select region-select" name="region">
+                            <option value="OC1" selected>Oceania</option>
+                            <option value="NA1">North America</option>
+                        </select>
+                    </div>
+                </div>
+                <div class="col-lg-9 mb-5">
+                    <div class="mobile-space-l mb-30"></div>
+                    <label class="muted-heading">Player name</label>
+                    <div class="input-group mb-30">
+                        <input type="search" name="player-name" class="form-control search-bar"
+                               placeholder="Enter player name exactly as it looks in-game" required>
+                        <div class="input-group-append">
+                            <button onclick="setModal(true)" type="submit" class="btn solid-btn standard-width">Search</button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </form>
+    </div>
+</div>
+
+<div class="container">
+    <div class="mt-5" style="display: flex;"></div>
+    <h4 class="big-heading mb-4">5v5 Ranked Solo<br/>leaderboards</h4>
+    <div class="row">
+        <div class="col-lg-6">
+            <table class="table mb-30">
+                <thead>
+                <tr class="light-row">
+                    <td class="sm-bold text-center" colspan="3">Oceania</td>
+                </tr>
+                <tr>
+                    <th scope="col"></th>
+                    <th scope="col">Player name</th>
+                    <th scope="col" class="text-center">League points</th>
+                </tr>
+                </thead>
+                <tbody>
+                {% set ns = namespace(n = 1) %}
+                {% for player in oce_leaderboard["entries"]|sort(attribute="leaguePoints", reverse = True) %}
+                {% if ns.n < 6 %}
+                <tr>
+                    <td class="sm-bold">#{{ ns.n }}</td>
+                    <td class="sm-player-name">
+                        <a onclick="setModal(true)" href="/player-profile/OC1/{{ player['summonerName'] }}">{{ player["summonerName"] }}</a>
+                    </td>
+                    <td class="text-center">{{ player["leaguePoints"] }}</td>
+                </tr>
+                {% set ns.n = ns.n + 1 %}
+                {% endif %}
+                {% endfor %}
+                </tbody>
+            </table>
+        </div>
+        <div class="col-lg-6">
+            <table class="table mb-30">
+                <thead>
+                <tr class="light-row">
+                    <td class="sm-bold text-center" colspan="3">North America</td>
+                </tr>
+                <tr>
+                    <th scope="col"></th>
+                    <th scope="col">Player name</th>
+                    <th scope="col" class="text-center">League points</th>
+                </tr>
+                </thead>
+                <tbody>
+                {% set ns = namespace(n = 1) %}
+                {% for player in na_leaderboard["entries"]|sort(attribute="leaguePoints", reverse = True) %}
+                {% if ns.n < 6 %}
+                <tr>
+                    <td class="sm-bold">#{{ ns.n }}</td>
+                    <td class="sm-player-name">
+                        <a onclick="setModal(true)" href="/player-profile/NA1/{{ player['summonerName'] }}">{{ player["summonerName"] }}</a>
+                    </td>
+                    <td class="text-center">{{ player["leaguePoints"] }}</td>
+                </tr>
+                {% set ns.n = ns.n + 1 %}
+                {% endif %}
+                {% endfor %}
+                </tbody>
+            </table>
+        </div>
+    </div>
+</div>
+
+{% include 'load-screen.html' %}
+
+{% endblock %}

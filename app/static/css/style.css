@@ -1,0 +1,415 @@
+.profile-icon {
+  width: 100%;
+  display: flex;
+  justify-content: center;
+  margin: auto;
+}
+
+.standard-width {
+  width: 130px;
+}
+
+.profile-icon img {
+  width: 100%;
+  max-width: 250px;
+}
+
+.favourites-icon {
+  width: 100px;
+  height: 100px;
+  display: flex;
+  justify-content: center;
+}
+
+.ranked-emblem {
+  width:100%;
+  display: flex;
+  justify-content: center;
+  margin: auto;
+}
+
+.ranked-emblem img {
+  width: 90%;
+  max-width: 200px;
+}
+
+.champion-icon {
+  scale: 115%;
+  display: flex;
+  justify-content: center;
+}
+
+.champion-search {
+  width: 112px;
+  overflow: hidden;
+  height: auto;
+  margin-bottom: 15px;
+}
+
+.champion-search img {
+scale: 115%;
+}
+
+.navbar {
+  background-color: #292a31;
+}
+
+body {
+  font-family: "Ubuntu", sans-serif;
+  color: #ffffff;
+  background-color: #1e1f24;
+  font-size: 17px;
+}
+
+a {
+  color: #ffffff;
+}
+
+table, th, td {
+  border: none !important;
+}
+
+th {
+  color: #ffffff6b;
+  font-weight: 700;
+  text-transform: uppercase;
+}
+
+.favourites-table {
+  border-collapse: separate;
+  border-spacing: 0px 23px;
+}
+
+tr {
+  color: #ffffff;
+  background-color: #292a31;
+}
+
+.muted-heading {
+  color: #ffffff6b;
+  font-weight: 700;
+  text-transform: uppercase;
+}
+
+.light-grey-bg {
+    background-color: #292a31;
+}
+
+.sm-bold {
+  font-weight: 700;
+  text-transform: uppercase;
+  font-size: 17px;
+ }
+
+ .bold-p {
+   font-weight: 700;
+ }
+
+.muted {
+  color: #ffffff6b;
+ }
+
+
+.search-bar {
+  height: auto;
+  border-radius: 0px;
+ }
+
+.region-select {
+    height: 57.94px;
+    border-radius: 0px;
+ }
+
+.sm-player-name {
+  font-weight: 700;
+  text-transform: uppercase;
+  font-style: italic;
+}
+
+.lg-player-name {
+  font-weight: 700;
+  text-transform: uppercase;
+  font-style: italic;
+  font-size: 25px;
+  line-height: 1.2;
+}
+
+
+.unfavourite {
+  color: #ffffff;
+  font-weight: 700;
+  text-transform: uppercase;
+}
+
+a:hover {
+  text-decoration: none;
+}
+
+.text-no-wrap {
+  white-space: nowrap;
+}
+
+.big-heading {
+  font-weight: 700;
+  text-transform: uppercase;
+  font-size: 30px;
+  text-align: center;
+}
+
+.xl-heading {
+  font-weight: 700;
+  text-transform: uppercase;
+  font-size: 50px;
+  text-align: center;
+}
+
+.solid-btn {
+  font-weight: 700;
+  text-transform: uppercase;
+  color: #ffffff;
+  background-color: #6151a8;
+  border-color: #6151a8
+  height: 50px;
+}
+
+.btn {
+border-radius: 0px;
+  font-size: 17px;
+  padding: 15px;
+  min-width: 120px;
+}
+
+.content-section {
+  background-color: #292a31;
+  padding: .75rem
+}
+
+.light-row {
+ background-color: #6151a8;
+}
+
+a:hover {
+  color: #6151a8;
+}
+
+.victory {
+  color: #9cf29b;
+  font-weight: 700;
+
+}
+
+.defeat {
+  color: #ff9696;
+  font-weight: 700;
+}
+
+.login-img {
+  background-image: url("http://ddragon.leagueoflegends.com/cdn/img/champion/splash/Sona_0.jpg");
+  background-repeat: no-repeat;
+  background-position: 100% 0%;
+  overflow: hidden;
+  height: 500px;
+}
+
+.login-img img, .register-img img {
+  height: 100%;
+}
+
+.register-img {
+  background-image: url("http://ddragon.leagueoflegends.com/cdn/img/champion/splash/Karthus_0.jpg");
+  background-repeat: no-repeat;
+  background-position: 73% 25%;
+  overflow: hidden;
+  height: 590px;
+}
+
+.middle-div {
+  margin: auto;
+}
+
+.table td, .table th {
+  padding: 16px !important;
+}
+
+.champ-name {
+  margin: auto;
+}
+
+.champ-div {
+    display: flex;
+    overflow: hidden;
+    height: 55px;
+    width: 55px;
+}
+
+.navbar .navbar-toggler-icon {
+    background-image: url("data:image/svg+xml,%3csvg xmlns='http://www.w3.org/2000/svg' width='30' height='30' viewBox='0 0 30 30'%3e%3cpath stroke='rgba%28255, 255, 255, 255' stroke-linecap='round' stroke-miterlimit='10' stroke-width='2' d='M4 7h22M4 15h22M4 23h22'/%3e%3c/svg%3e");
+}
+
+.navbar .navbar-toggler {
+    color: rgb(255 255 255);
+    border-color: rgb(255 255 255);
+}
+
+.navbar-toggler {
+    border: 2px solid transparent;
+}
+
+.logo {
+    max-height:35px;
+    height: 100%;
+}
+
+small {
+color: #ffffff6b;
+}
+
+.avatar {
+  color: #ffffff6b;
+}
+
+rect {
+    stroke-width: 0;
+}
+
+g path {
+    stroke-width: 0;
+}
+
+g rect {
+    stroke-width: 20px;
+    }
+
+.win-rate-container {
+  position: relative;
+  text-align: center;
+  color: #ffffff;
+}
+
+.win-rate-percent {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+}
+
+@media (max-width: 991.98px) {
+    .hero-image-mobile {
+    height: 410px !important;
+    }
+}
+
+@media (min-width: 1200px) {
+    .mobile-space-xl {
+        display: none;
+    }
+}
+
+@media (max-width: 1200px) {
+    .desktop-space-xl {
+        display: none;
+    }
+}
+
+@media (min-width: 992px) {
+    .mobile-space-l {
+        display: none;
+    }
+
+}
+
+.mb-30 {
+    margin-bottom: 30px;
+}
+
+.mt-30 {
+    margin-top: 30px;
+}
+
+.role-stats g text {
+    transform: translateY(7px);
+}
+
+.champion-hero {
+  height: 500px;
+  background-size: cover;
+  background-position: 50% 15%;
+}
+
+.class-tags {
+    background-color: #6151a8;
+}
+
+.hero-image-champion-page {
+    background-image: linear-gradient(rgba(0, 0, 0, 0.5), rgba(0, 0, 0, 0.5)), url("https://ddragon.leagueoflegends.com/cdn/img/champion/splash/Vladimir_1.jpg");
+}
+
+.hero-image-index-page {
+    background-image: linear-gradient(rgba(0, 0, 0, 0.5), rgba(0, 0, 0, 0.5)), url("https://ddragon.leagueoflegends.com/cdn/img/champion/splash/Lux_2.jpg");
+}
+
+.hero-image {
+  height: 505px;
+  background-position: 50% 10%;
+  background-repeat: no-repeat;
+  background-size: cover;
+  position: relative;
+}
+
+.hero-text {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+}
+
+.grow {
+    -webkit-transition: -webkit-transform 0.5s;
+  transition: -webkit-transform 0.5s;
+  transition: transform 0.5s;
+  transition: transform 0.5s, -webkit-transform 0.5s;
+}
+
+.grow:hover{
+  -webkit-transform: scale(1.15);
+  transform: scale(1.15);
+}
+
+.btn.disabled, .btn:disabled {
+    opacity: .4 !important;
+}
+
+.modal {
+    background-color: rgba(0, 0, 0, 0.766);
+    height: 100%;
+    width: 100%;
+    color: white;
+    display: none;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    text-align: center;
+    z-index: 2;
+    top: 0;
+    animation: fadeIn 0.7s;
+}
+
+@keyframes fadeIn {
+  from {opacity: 0}
+  to {opacity: 1}
+}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+

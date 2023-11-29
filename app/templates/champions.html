@@ -1,0 +1,155 @@
+{% extends 'base.html' %}
+{% block main %}
+
+<form action="" method="POST">
+    <div class="hero-image-champion-page hero-image">
+        <div class="container hero-text">
+            <!-- Champion search area -->
+            <div class="row">
+                <div class="col">
+                    <h4 class="big-heading mb-4">Champion search</h4>
+                </div>
+            </div>
+            <div class="row">
+                <div class="col">
+                    <label class="muted-heading">Champion name</label>
+                    <div class="input-group">
+                        {% if term == "all" or term == "" %}
+                        <input name="champion-name" class="form-control search-bar" type="search"
+                               placeholder="Enter champion name, for example, 'Amumu' or 'Lux'">
+                        {% else %}
+                        <input name="champion-name" class="form-control search-bar" type="search"
+                               placeholder="Enter champion name, for example, 'Amumu' or 'Lux'" value="{{ term|unencode_url }}">
+                        {% endif %}
+                        <div class="input-group-append">
+                            <button type="submit" class="btn solid-btn standard-width">Search</button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="container">
+        <div class="mt-5" style="display: flex;"></div>
+        <div class="row">
+            <div class="col-lg-4 mb-30">
+                <!-- Class filter area -->
+                <label class="muted-heading">Class</label>
+                <div class="input-group">
+                    <select class="custom-select region-select" name="champion-class" onchange="this.form.submit()">
+                        {% if champion_class == "all" %}
+                        <option value="all" selected>All</option>
+                        {% else %}
+                        <option value="all">All</option>
+                        {% endif %}
+                        {% if champion_class == "fighter" %}
+                        <option value="fighter" selected>Fighter</option>
+                        {% else %}
+                        <option value="fighter">Fighter</option>
+                        {% endif %}
+                        {% if champion_class == "tank" %}
+                        <option value="tank" selected>Tank</option>
+                        {% else %}
+                        <option value="tank">Tank</option>
+                        {% endif %}
+                        {% if champion_class == "support" %}
+                        <option value="support" selected>Support</option>
+                        {% else %}
+                        <option value="support">Support</option>
+                        {% endif %}
+                        {% if champion_class == "mage" %}
+                        <option value="mage" selected>Mage</option>
+                        {% else %}
+                        <option value="mage">Mage</option>
+                        {% endif %}
+                        {% if champion_class == "assassin" %}
+                        <option value="assassin" selected>Assassin</option>
+                        {% else %}
+                        <option value="assassin">Assassin</option>
+                        {% endif %}
+                        {% if champion_class == "marksman" %}
+                        <option value="marksman" selected>Marksman</option>
+                        {% else %}
+                        <option value="marksman">Marksman</option>
+                        {% endif %}
+                    </select>
+                </div>
+            </div>
+            <!-- Difficulty filter area -->
+            <div class="col-lg-4 mb-30">
+                <label class="muted-heading">Difficulty</label>
+                <div class="input-group">
+                    <select class="custom-select region-select" name="champion-difficulty" onchange="this.form.submit()">
+                        {% if difficulty == "all" %}
+                        <option value="all" selected>All</option>
+                        {% else %}
+                        <option value="all">All</option>
+                        {% endif %}
+                        {% if difficulty == "easy" %}
+                        <option value="easy" selected>Easy</option>
+                        {% else %}
+                        <option value="easy">Easy</option>
+                        {% endif %}
+                        {% if difficulty == "medium" %}
+                        <option value="medium" selected>Medium</option>
+                        {% else %}
+                        <option value="medium">Medium</option>
+                        {% endif %}
+                        {% if difficulty == "hard" %}
+                        <option value="hard" selected>Hard</option>
+                        {% else %}
+                        <option value="hard">Hard</option>
+                        {% endif %}
+                    </select>
+                </div>
+            </div>
+            <!-- Sort filter area -->
+            <div class="col-lg-4 mb-5">
+                <label class="muted-heading">Sort</label>
+                <div class="input-group">
+                    <select class="custom-select region-select" name="sort" onchange="this.form.submit()">
+                        {% if sort == "asc" %}
+                        <option value="asc" selected>Ascending</option>
+                        {% else %}
+                        <option value="asc">Ascending</option>
+                        {% endif %}
+                        {% if sort == "desc" %}
+                        <option value="desc" selected>Decending</option>
+                        {% else %}
+                        <option value="desc">Decending</option>
+                        {% endif %}
+                    </select>
+                </div>
+            </div>
+        </div>
+        {% if champion_results["found"] > 0%}
+        {% for row in champion_results["hit"]|batch(6) %}
+        <div class="row">
+            {% for champion in row %}
+            <div class="col-6 col-sm-4 col-xl-2">
+                <a href='{{ request.url_root }}champion-profile/{{ champion["fields"]["id"] }}'>
+                    <div class="content-section p-4 mb-30 text-center grow">
+                        <div class="champion-search">
+                            <img class="" alt="Champion icon"
+                                 src="http://ddragon.leagueoflegends.com/cdn/12.18.1/img/champion/{{ champion['fields']['image'] }}">
+                        </div>
+                        <p class="bold-p mt-auto mb-auto">{{ champion["fields"]["name"]|nickname }}</p>
+                    </div>
+                </a>
+            </div>
+            {% endfor %}
+        </div>
+        {% endfor %}
+        {% else %}
+        <div class="row">
+            <div class="col">
+                <div class="content-section p-4 mb-0">
+                    <p class="mb-0 defeat text-center">We couldn't any matches, please try again</p>
+                </div>
+            </div>
+        </div>
+        {% endif %}
+    </div>
+</form>
+
+{% endblock %}

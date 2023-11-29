@@ -1,0 +1,175 @@
+{% extends 'base.html' %}
+{% block main %}
+
+<div class="container mt-5">
+    {% if player_info %}
+    <div class="row">
+        <div class="col-lg-3 text-center">
+            <!-- Profile area -->
+            <h4 class="big-heading mt-30 mb-4">Profile</h4>
+            <div class="content-section p-4 mb-30">
+                <div class="profile-icon text-center mb-4">
+                    <img src="https://ddragon.leagueoflegends.com/cdn/12.20.1/img/profileicon/{{ player_info['profileIconId'] }}.png"
+                         alt="Profile icon">
+                </div>
+                <span class="lg-player-name mb-0">{{ player_info["name"] }}</span>
+                <p class="mt-1 mb-0">{{ search_region | format_region }}<br/>
+                    Level {{ player_info["summonerLevel"] }}</p>
+            </div>
+            {% if is_favourite %}
+            <a href="" class="btn solid-btn btn-block mt-4 mb-5 disabled" role="button" aria-pressed="true">Favourited</a>
+            {% else %}
+            <a href="/favourite-player/{{ search_region | encode_url }}/{{ player_info['name'] | encode_url }}"
+               class="btn solid-btn btn-block mt-4 mb-5" role="button" aria-pressed="true">Favourite</a>
+            {% endif %}
+
+            <!-- Ranked area -->
+            {% if player_rank_info %}
+            <h4 class="big-heading mt-4 mb-4">Ranked</h4>
+            {% for queue_type in player_rank_info %}
+            <div class="content-section p-4 mb-30">
+                <div class="ranked-emblem mb-4">
+                    <img src="{{ queue_type['tier'] | get_ranked_emblem }}" alt="Rank emblem">
+                </div>
+                <h5 class="sm-bold mb-2">{{ queue_type["tier"] | capitalize }} {{ queue_type["rank"] }}</h5>
+                <span class="">{{ queue_type["queueType"] | replace("_", " ") | replace("SR", "") | title }}</br>
+                    {{ queue_type["leaguePoints"] }} League Points<br/>
+                    {{ queue_type["wins"] }} Wins<br/>
+                    {{ queue_type["losses"] }} Losses</span>
+            </div>
+            {% endfor %}
+            {% endif %}
+        </div>
+
+        <div class="col-lg-9">
+            <!-- Statistics area -->
+            <h4 class="big-heading mt-30 mb-4">Recent statistics</h4>
+            {% if match_history %}
+            <div class="row">
+                <div class="col-xl-5">
+                    <div class="content-section p-4 mb-30">
+                        <!-- Win rate chart -->
+                        <p class="sm-bold text-center mb-3">Matches won</p>
+                        <div class="win-rate-container">
+                            <div class="d-flex justify-content-center" id="win-rate-div"></div>
+                            <script>{% include 'win-rate.js' %}</script>
+                            <div class="win-rate-percent">
+                                <p class="mb-0" style="line-height: 1.3;">
+                                    {{ "%.0f"|format((win_rate["win"] / (win_rate["win"] + win_rate["loss"])) * 100) }}%<br/>
+                                    Win Rate
+                                </p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-xl-7">
+                    <div class="content-section p-4 mb-5">
+                        <!-- Most played role chart -->
+                        <p class="sm-bold text-center mb-3">Most played role</p>
+                        <div class="d-flex justify-content-center role-stats" id="role-stats-div"></div>
+                        <script>{% include 'role-stats.js' %}</script>
+                    </div>
+                </div>
+            </div>
+
+            {% else %}
+            <div class="content-section p-4 mb-4">
+                <p class="defeat text-center mb-0">Not enough matches played</p>
+            </div>
+            {% endif %}
+
+            <!-- Match history area -->
+            <h4 class="big-heading mt-0 mb-4">Match history</h4>
+            {% if match_history %}
+            <div class="overflow-auto">
+                <table class="table mb-30">
+                    <thead>
+                    <tr>
+                        <th class="text-center" scope="col">Champion</th>
+                        <th class="text-center" scope="col">Role</th>
+                        <th class="text-center" scope="col">Outcome</th>
+                        <th class="text-center" scope="col">
+                            <span data-toggle="tooltip" data-placement="top" title="Kills / Deaths / Assists">KDA</span>
+                        </th>
+                        <th class="text-center" scope="col">Mode</th>
+                        <th class="text-center" scope="col">Duration</th>
+                    </tr>
+                    </thead>
+                    <tbody>
+                    {% set ns = namespace(n = None) %}
+                    {% for match in match_history %}
+                    {% set index = match["metadata"]["participants"].index(player_info["puuid"]) %}
+                    {% if ns.n != match["info"]["gameCreation"] | ctime %}
+                    <tr class="light-row">
+                        <td class="sm-bold text-center" colspan="6">{{ match["info"]["gameCreation"] | ctime }}</td>
+                    </tr>
+                    {% set ns.n = match["info"]["gameCreation"] | ctime %}
+                    {% endif %}
+                    <tr>
+                        <td>
+                            {% set champion_icon = match["info"]["participants"][index]["championName"].replace(" ", "") %}
+                            <a href="{{ request.url_root }}champion-profile/{{ match['info']['participants'][index]['championName'] | get_champion_id }}">
+                                <div class="align-middle champ-div grow mx-auto">
+                                    <img class="champion-icon mx-auto" alt="Champion icon"
+                                        src="http://ddragon.leagueoflegends.com/cdn/12.18.1/img/champion/{{ champion_icon }}.png">
+                                </div>
+                            </a>
+                        </td>
+                        <td class="align-middle text-center">
+                            {% if match["info"]["participants"][index]["teamPosition"] %}
+                            {% if match["info"]["participants"][index]["teamPosition"] == "UTILITY" %}
+                            Support
+                            {% else %}
+                            {{ match["info"]["participants"][index]["teamPosition"] | capitalize }}
+                            {% endif %}
+                            {% else %}
+                            Mid
+                            {% endif %}
+                        </td>
+                        <td class="align-middle text-center">
+                            {% if match["info"]["participants"][index]["win"] %}
+                            <span class="victory">Victory</span>
+                            {% else %}
+                            <span class="defeat">Defeat</span>
+                            {% endif %}
+                        </td>
+                        <td class="align-middle text-center text-no-wrap">
+                            {{ match["info"]["participants"][index]["kills"] }} /
+                            {{ match["info"]["participants"][index]["deaths"] }} /
+                            {{ match["info"]["participants"][index]["assists"] }}
+                        </td>
+                        <td class="align-middle text-center">
+                            {% for queue_type in queue_types %}
+                            {% if queue_type['queueId'] == match["info"]["queueId"] %}
+                            {{ queue_type["description"] | replace(" games", "") }}
+                            {% endif %}
+                            {% endfor %}
+                        </td>
+                        <td class="align-middle text-center">{{ (match["info"]["gameDuration"]/60)|round|int }} mins</td>
+                    </tr>
+                    {% endfor %}
+                    </tbody>
+                </table>
+            </div>
+            {% else %}
+            <!-- Match history error -->
+            <div class="content-section p-4 mb-4">
+                <p class="defeat text-center mb-0">No recent matches played</p>
+            </div>
+            {% endif %}
+
+            {% else %}
+            <!-- Search results error -->
+            <div class="row">
+                <div class="col text-center">
+                    <h4 class="big-heading mt-4 mb-4">Player not found</h4>
+                    <div class="content-section p-4 mb-0">
+                        <p class="mb-0 defeat">We couldn't find a player with this name, please try again</p>
+                    </div>
+                </div>
+            </div>
+            {% endif %}
+        </div>
+    </div>
+</div>
+{% endblock %}

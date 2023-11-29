@@ -1,0 +1,116 @@
+{% extends 'base.html' %}
+{% block main %}
+
+{% if champion_data['id'] == "Kindred" %}
+<div class="hero-image " style="background:linear-gradient(rgba(0, 0, 0, 0.5), rgba(0, 0, 0, 0.5)),
+    url('http://ddragon.leagueoflegends.com/cdn/img/champion/splash/{{ champion_data['id'] }}_1.jpg');
+    background-position: 50% 20%; background-repeat: no-repeat; background-size: cover; position: relative;">
+{% elif champion_data['id'] == "Gnar" or champion_data['id'] == "Heimerdinger" or champion_data['id'] == "Kayn" or champion_data['id'] == "KogMaw"
+    or champion_data['id'] == "Malphite" or champion_data['id'] == "Warwick" or champion_data['id'] == "Zac" %}
+<div class="hero-image " style="background:linear-gradient(rgba(0, 0, 0, 0.5), rgba(0, 0, 0, 0.5)),
+    url('http://ddragon.leagueoflegends.com/cdn/img/champion/splash/{{ champion_data['id'] }}_0.jpg');
+    background-position: 50% 60%; background-repeat: no-repeat; background-size: cover; position: relative;">
+{% elif champion_data['id'] == "Belveth" or champion_data['id'] == "Darius" or champion_data['id'] == "Fiora" or champion_data['id'] == "Leona" or
+    champion_data['id'] == "Galio" or champion_data['id'] == "Graves" or champion_data['id'] == "Illaoi" or champion_data['id'] == "Irelia" or
+    champion_data['id'] == "Renata" or champion_data['id'] == "Sett" or champion_data['id'] == "Shen" or champion_data['id'] == "Taric" or
+    champion_data['id'] == "Xerath" or champion_data['id'] == "Volibear" or champion_data['id'] == "Yone" or champion_data['id'] == "Yorick" %}
+<div class="hero-image " style="background:linear-gradient(rgba(0, 0, 0, 0.5), rgba(0, 0, 0, 0.5)),
+    url('http://ddragon.leagueoflegends.com/cdn/img/champion/splash/{{ champion_data['id'] }}_0.jpg');
+    background-position: 50% 0%; background-repeat: no-repeat; background-size: cover; position: relative;">
+{% else %}
+<div class="hero-image " style="background:linear-gradient(rgba(0, 0, 0, 0.5), rgba(0, 0, 0, 0.5)),
+    url('http://ddragon.leagueoflegends.com/cdn/img/champion/splash/{{ champion_data['id'] }}_0.jpg');
+    background-position: 50% 20%; background-repeat: no-repeat; background-size: cover; position: relative;">
+{% endif %}
+    <div class="container hero-text">
+        <div class="row">
+            <div class="col text-center">
+                <h4 class="big-heading mb-1 mt-2">{{ champion_data["name"] }}</h4>
+                <h4 class="lg-player-name mt-0 mb-3">{{ champion_data["title"] }}</h4>
+                {% for tag in champion_data["tags"] %}
+                <span class="bold-p class-tags p-2 mr-1 ml-1">{{ tag }}</span>
+                {% endfor %}
+                <span class="bold-p class-tags p-2 mr-1 ml-1">{{ champion_data["info"]["difficulty"]|difficulty|safe }}</span>
+            </div>
+        </div>
+    </div>
+</div>
+
+<div class="container mt-5">
+    <div class="row">
+        <div class="col">
+            <h4 class="big-heading mb-4">Abilities</h4>
+        </div>
+    </div>
+
+    <div class="row">
+        <div class="col-lg-6">
+            <div class="content-section p-4 mb-30">
+                <div class="row">
+                    <div class="col-2">
+                        <img class="" alt="Ability icon"
+                             src="https://ddragon.leagueoflegends.com/cdn/12.20.1/img/passive/{{ champion_data['passive']['image']['full'] }}">
+                    </div>
+                    <div class="col-10">
+                        <h5 class="sm-bold mb-2">{{ champion_data["passive"]["name"] }}</h5>
+                        <p class="mb-0">{{ champion_data["passive"]["description"] | replace("<br>", " ")|strip_tags }}</p>
+                    </div>
+                </div>
+            </div>
+            <div class="content-section p-4 mb-30">
+                <div class="row">
+                    <div class="col-2">
+                        <img class="" alt="Ability icon"
+                             src="https://ddragon.leagueoflegends.com/cdn/12.20.1/img/spell/{{ champion_data['spells'][0]['image']['full'] }}">
+                    </div>
+                    <div class="col-10">
+                        <h5 class="sm-bold mb-2">{{ champion_data["spells"][0]["name"] }}</h5>
+                        <p class="mb-0">{{ champion_data["spells"][0]["description"] | replace("<br>", " ")|strip_tags }}</p>
+                    </div>
+                </div>
+            </div>
+            <div class="content-section p-4 mb-30">
+                <div class="row">
+                    <div class="col-2">
+                        <img class="" alt="Ability icon"
+                             src="https://ddragon.leagueoflegends.com/cdn/12.20.1/img/spell/{{ champion_data['spells'][1]['image']['full'] }}">
+                    </div>
+                    <div class="col-10">
+                        <h5 class="sm-bold mb-2">{{ champion_data["spells"][1]["name"] }}</h5>
+                        <p class="mb-0">{{ champion_data["spells"][1]["description"] | replace("<br>", " ")|strip_tags }}</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div class="col-lg-6">
+            <div class="content-section p-4 mb-30">
+                <div class="row">
+                    <div class="col-2">
+                        <img class="" alt="Ability icon"
+                             src="https://ddragon.leagueoflegends.com/cdn/12.20.1/img/spell/{{ champion_data['spells'][2]['image']['full'] }}">
+                    </div>
+                    <div class="col-10">
+                        <h5 class="sm-bold mb-2">{{ champion_data["spells"][2]["name"] }}</h5>
+                        <p class="mb-0">{{ champion_data["spells"][2]["description"] | replace("<br>", " ")|strip_tags }}</p>
+                    </div>
+                </div>
+            </div>
+
+            <div class="content-section p-4 mb-30">
+                <div class="row">
+                    <div class="col-2">
+                        <img class="" alt="Ability icon"
+                             src="https://ddragon.leagueoflegends.com/cdn/12.20.1/img/spell/{{ champion_data['spells'][3]['image']['full'] }}">
+                    </div>
+                    <div class="col-10">
+                        <h5 class="sm-bold mb-2">{{ champion_data["spells"][3]["name"] }}</h5>
+                        <p class="mb-0">{{ champion_data["spells"][3]["description"] | replace("<br>", " ")|strip_tags }}</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+{% endblock %}
