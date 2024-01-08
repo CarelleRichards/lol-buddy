@@ -12,9 +12,9 @@ LoL Buddy is a web application, which caters to League of Legends computer game 
 - Champion search form
 - Champion profile page
 
-The application was written in Python and uses Flask as the web framework. The front end consists of HTML, CSS and JavaScript. Various AWS services were chosen to develop LoL Buddy, including Elastic Beanstalk, S3, DynamoDB, API Gateway, Lambda and CloudSearch. Other external services, such as Google Chart API, League of Legends API and League of Legends Data Dragon, were also used.
+The application was written in Python and uses Flask as the web framework. The front end consists of HTML, CSS and JavaScript. Various AWS components were chosen to develop LoL Buddy, including Elastic Beanstalk, S3, DynamoDB, API Gateway, Lambda and CloudSearch. Other external services, such as Google Chart API, League of Legends API and League of Legends Data Dragon, were also used.
 
-The application is no longer on the AWS platform, but all the code can be found here. The main application code is in the “app” folder. The “predeployment” folder consists of scripts that were used to set up certain AWS services. The code that was run by Lambda is in the “lambda_functions” folder.
+The application is no longer on the AWS platform, but all the code can be found here. The main application code is in the “app” folder. The “predeployment” folder consists of scripts that were used to set up certain AWS components. The code that was run by Lambda is in the “lambda_functions” folder.
 
 ## Architectural diagram
 
